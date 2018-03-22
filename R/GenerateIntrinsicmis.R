@@ -63,5 +63,5 @@ Generatetestid <- function(subtypes){
     testcaseid[[i]] <- id.case[sample(completecasesize[i],testcasesize[i])]
     testcontrolid[[i]] <- id.control[sample(n.control,testcasesize[i])]
   }
-  return(list(testcaseid=testcaseid,testcontrolid=testcontrolid,subtypenames=names(testcasesize)))
+  return(list(testcaseid=testcaseid,testcontrolid=testcontrolid,subtypenames=names(testcasesize),testcasesize=testcasesize))
 }
