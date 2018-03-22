@@ -45,7 +45,7 @@ GenerateIntrinsicmis <- function(ER,PR,HER2,Grade){
 Generatetestid <- function(subtypes){
   set.seed(1)
   M <- length(table(subtypes))
-  testcasesize <- rep(0,M-2)
+  testcasesize <- rep(0,M-1)
   completecasesize <- rep(0,M-2)
   for(i in 2:(M-1)){
     testcasesize[i-1] <- floor(table(subtypes)[i]/100)*10
@@ -63,5 +63,13 @@ Generatetestid <- function(subtypes){
     testcaseid[[i]] <- id.case[sample(completecasesize[i],testcasesize[i])]
     testcontrolid[[i]] <- id.control[sample(n.control,testcasesize[i])]
   }
+  i <-i +1
+  temp <- NULL
+  for(j in 1:(M-2)){
+    temp <- c(temp,testcaseid[[j]])
+  }
+  testcaseid[[i]] <- temp
+  testcontrolid[[i]] <- id.control[sample(n.control,length(testcaseid[[i]]))]
+  testcasesize[[i]] <- length(testcaseid[[i]])
   return(list(testcaseid=testcaseid,testcontrolid=testcontrolid,subtypenames=names(testcasesize),testcasesize=testcasesize))
 }
