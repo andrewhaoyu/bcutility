@@ -3,5 +3,6 @@
 export(GenerateIntrinsicmis)
 export(Generatetestid)
 export(HeterVarianceEstimate)
+export(dicestiamte)
 export(ebestimate)
 export(eblaplace)

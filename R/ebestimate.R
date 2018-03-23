@@ -26,6 +26,18 @@ ebestimate <- function(logodds.subtype,
 
 
 
+#' Title
+#'
+#' @param logodds.subtype
+#' @param sigma.subtype
+#' @param logodds.standard
+#' @param p.heter
+#' @param pcutoff
+#'
+#' @return
+#' @export
+#'
+#' @examples
 dicestiamte <- function(logodds.subtype,
                         sigma.subtype,
                         logodds.standard,
