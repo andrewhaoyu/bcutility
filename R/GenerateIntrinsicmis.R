@@ -21,13 +21,13 @@ GenerateIntrinsicmis <- function(ER,PR,HER2,Grade){
   subtypes[idx.mis] <- "mis"
   subtypes[idx.LA] <- "Luminal_A"
   subtypes[idx.LB] <- "Luminal_B"
-  subtypes[idx.LUBHER2] <- "Luminal_B_HER2Enriched"
+  subtypes[idx.LUBHER2] <- "Luminal_B_HER2Neg"
   subtypes[idx.HER2] <- "HER2Enriched"
   subtypes[idx.Tp] <- "TripleNeg"
   subtypes <- factor(subtypes,levels=c("control",
                                        "Luminal_A",
                                        "Luminal_B",
-                                       "Luminal_B_HER2Enriched",
+                                       "Luminal_B_HER2Neg",
                                        "HER2Enriched",
                                        "TripleNeg",
                                        "mis"))
