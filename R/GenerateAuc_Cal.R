@@ -41,6 +41,8 @@ GenerateAuc_Cal <- function(
   specificities <- matrix(0,n,5)
   sensitivities[,1] <- roc.standard$sensitivities
   specificities[,1] <- roc.standard$specificities
+
+
   prs.intrinsic <- x.test%*%log.odds.intrinsic
 
   cal.intrinsic <- calibration(y.test,prs.intrinsic)
