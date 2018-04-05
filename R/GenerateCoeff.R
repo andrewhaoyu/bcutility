@@ -18,12 +18,13 @@ GenerateCoeff <- function(
   log.odds.dic,
   log.odds.intrinsic.eb,
   log.odds.intrinsic.la,
+  log.odds.intrinsic.tree,
   x.test,
   y.test
 ){
   pla <- 2
-  coeff <- rep(0,5)
-  coeff_95 <- rep("c",5)
+  coeff <- rep(0,6)
+  coeff_95 <- rep("c",6)
   prs.standard <- x.test%*%log.odds.standard
   idx.control <- which(y.test==0)
   sd.prs.control <- sd(prs.standard[idx.control])
@@ -64,6 +65,14 @@ GenerateCoeff <- function(
   temp <- exp(coef(model)[2]+summary(model)$coefficient[2,2]*qnorm(c(0.025,0.5,0.975)))
   coeff[5] <- temp[2]
   coeff_95[5] <- paste0(round(temp[2],pla)," (",round(temp[1],pla)," - ",round(temp[3],pla),")")
+  prs.intrinsic.tree <- x.test%*%log.odds.intrinsic.tree
+  sd.prs.control <- sd(  prs.intrinsic.tree[idx.control])
+  prs.intrinsic.tree.scale <-  prs.intrinsic.tree/sd.prs.control
+  model <- glm(y.test~  prs.intrinsic.tree.scale,family = binomial(link='logit'))
+  temp <- exp(coef(model)[2]+summary(model)$coefficient[2,2]*qnorm(c(0.025,0.5,0.975)))
+  coeff[6] <- temp[2]
+  coeff_95[6] <- paste0(round(temp[2],pla)," (",round(temp[1],pla)," - ",round(temp[3],pla),")")
+
   return(list(coeff=coeff,
               coeff_95=coeff_95))
 

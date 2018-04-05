@@ -18,12 +18,13 @@ GenerateAuc_Cal <- function(
   log.odds.dic,
   log.odds.intrinsic.eb,
   log.odds.intrinsic.la,
+  log.odds.intrinsic.tree,
   x.test,
   y.test
 ){
-  auc.result <- rep(0,5)
-  auc.95 <- rep("c",5)
-  cal.result <- matrix(0,5,10)
+  auc.result <- rep(0,6)
+  auc.95 <- rep("c",6)
+  cal.result <- matrix(0,6,10)
   prs.standard <- x.test%*%log.odds.standard
 
   cal.standard <- calibration(y.test,prs.standard)
@@ -106,6 +107,29 @@ GenerateAuc_Cal <- function(
   cal.result[5,] <- cal.intrinsic.la
   sensitivities[,5] <- roc.intrinsic.la$sensitivities
   specificities[,5] <- roc.intrinsic.la$specificities
+
+
+
+  prs.intrinsic.tree <- x.test%*%log.odds.intrinsic.tree
+
+  cal.intrinsic.tree <- calibration(y.test,prs.intrinsic.tree)
+  roc.intrinsic.tree <- roc(y.test,as.vector(prs.intrinsic.tree),ci=T,plot=F)
+  ptree <- 4
+  auc.result[6] <- round(as.numeric(roc.intrinsic.tree$auc),ptree)*100
+
+  auc.95[6] <- paste0(round(as.numeric(roc.intrinsic.tree$ci)[1],ptree)*100,
+                      "-",
+                      round(as.numeric(roc.intrinsic.tree$ci)[3],ptree)*100)
+  cal.intrinsic.tree <- calibration(y.test,prs.intrinsic.tree)
+  cal.result[6,] <- cal.intrinsic.tree
+  sensitivities[,6] <- roc.intrinsic.tree$sensitivities
+  specificities[,6] <- roc.intrinsic.tree$specificities
+
+
+
+
+
+
 
   return(list(auc.result=auc.result,
               auc.95=auc.95,

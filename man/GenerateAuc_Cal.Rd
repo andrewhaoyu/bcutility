@@ -5,7 +5,8 @@
 \title{Title}
 \usage{
 GenerateAuc_Cal(log.odds.standard, log.odds.intrinsic, log.odds.dic,
-  log.odds.intrinsic.eb, log.odds.intrinsic.la, x.test, y.test)
+  log.odds.intrinsic.eb, log.odds.intrinsic.la, log.odds.intrinsic.tree, x.test,
+  y.test)
 }
 \arguments{
 \item{y.test}{}
