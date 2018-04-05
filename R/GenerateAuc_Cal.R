@@ -38,8 +38,8 @@ GenerateAuc_Cal <- function(
   cal.standard <- calibration(y.test,prs.standard)
   cal.result[1,] <- cal.standard
   n <- length(roc.standard$sensitivities)
-  sensitivities <- matrix(0,n,5)
-  specificities <- matrix(0,n,5)
+  sensitivities <- matrix(0,n,6)
+  specificities <- matrix(0,n,6)
   sensitivities[,1] <- roc.standard$sensitivities
   specificities[,1] <- roc.standard$specificities
 
