@@ -39,7 +39,7 @@ tree_function <- function(log.odds,sigma){
   new.sigma <- solve(t(C.update)%*%solve(sigma)%*%C.update)
   log.like <- dmvnorm(x= log.odds,mean= new.norm.mean,sigma=sigma,log=T)
   #AIC[2] <- 2*length(new.beta)-2*log.like
-  AIC[2] <- log(length(new.beta))*M-2*log.like
+  AIC[2] <- log(M)*length(new.beta)-2*log.like
 
   new.M <- M-1
   pairs <- combn(new.M,2)
@@ -62,7 +62,7 @@ tree_function <- function(log.odds,sigma){
   new.sigma <- solve(t(C.update)%*%solve(sigma)%*%C.update)
   log.like <- dmvnorm(x= log.odds,mean= new.norm.mean,sigma=sigma,log=T)
   #AIC[3] <- 2*length(new.beta)-2*log.like
-  AIC[3] <-  log(length(new.beta))*M-2*log.like
+  AIC[3] <-  log(M)*length(new.beta)-2*log.like
 
 
   new.M <- M-2
@@ -86,7 +86,7 @@ tree_function <- function(log.odds,sigma){
   new.sigma <- solve(t(C.update)%*%solve(sigma)%*%C.update)
   log.like <- dmvnorm(x= log.odds,mean= new.norm.mean,sigma=sigma,log=T)
  # AIC[4] <- 2*length(new.beta)-2*log.like
-  AIC[4] <- log(length(new.beta))*M-2*log.like
+  AIC[4] <- log(M)*length(new.beta)-2*log.like
 
 
   new.M <- M-3
@@ -110,7 +110,7 @@ tree_function <- function(log.odds,sigma){
   new.sigma <- solve(t(C.update)%*%solve(sigma)%*%C.update)
   log.like <- dmvnorm(x= log.odds,mean= new.norm.mean,sigma=sigma,log=T)
   #AIC[5] <- 2*length(new.beta)-2*log.like
-  AIC[5] <- log(length(new.beta))*M-2*log.like
+  AIC[5] <- log(M)*length(new.beta)-2*log.like
   idx.AIC <- which.min(AIC)
   best.log.odds <- beta.mat[idx.AIC,]
   return(best.log.odds)
