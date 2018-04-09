@@ -137,3 +137,65 @@ two_stage_random <-function(
                    infor.random = infor.random1)
 }
 
+
+#' Title
+#'
+#' @param y.pheno.mis1
+#' @param gene1
+#' @param x.covar1
+#' @param y.pheno.mis2
+#' @param gene2
+#' @param x.covar2
+#'
+#' @return
+#' @export
+#'
+#' @examples
+two_data_standard_anlysis <- function(y.pheno.mis1,
+                                      gene1,
+                                      x.covar1,
+                                      y.pheno.mis2,
+                                      gene2,
+                                      x.covar2){
+  result1 <- standard_analysis(y.pheno.mis1,
+                               gene1,
+                               x.covar1)
+  result2 <- standard_analysis(y.pheno.mis2,
+                               gene2,
+                               x.covar2)
+  meta.result <- LogoddsMetaAnalysis( result1[[1]],
+                                      result1[[2]],
+                                      result2[[1]],
+                                      result2[[2]])
+
+  coeff.meta <- meta.result[[1]]
+  var.meta <- meta.result[[2]]
+  p.value <- as.numeric(DisplaySecondStageTestResult(coeff.meta,var.meta)[2])
+  return(p.value)
+
+}
+#' Title
+#'
+#' @param y.pheno.mis1
+#' @param gene1
+#' @param x.covar1
+#'
+#' @return
+#' @export
+#'
+#' @examples
+standard_analysis <- function(y.pheno.mis1,
+                              gene1,
+                              x.covar1){
+  y <- y.pheno.mis1[,1]
+  country <- x.covar1[,ncol(x.covar1)]
+  x <- cbind(gene1,x.covar1[,1:(ncol(x.covar1)-1)])
+  model <- glm(y~as.matrix(x)+country,family = binomial(link ='logit'))
+  coeff <- as.numeric(coef(model)[2])
+  var <- (summary(model)$coefficient[2,2])^2
+  return(result = list(coeff=coeff,
+                       var= var))
+
+}
+
+
