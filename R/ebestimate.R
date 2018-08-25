@@ -9,6 +9,49 @@
 #' @export
 #'
 #' @examples
+EbestimateNew <- function(logodds.subtype,
+                       sigma.subtype,
+                       logodds.standard,
+                       prior.sigma
+){
+  M <- length(logodds.subtype)
+
+    result <- solve(solve(sigma.subtype)+solve(prior.sigma))%*%(solve(sigma.subtype)%*%logodds.subtype+
+                                                                     solve(prior.sigma)*rep(logodds.standard,M))
+    return(result)
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#' Title
+#'
+#' @param logodds.subtype
+#' @param sigma.subtype
+#' @param logodds.standard
+#' @param prior.sigma
+#'
+#' @return
+#' @export
+#'
+#' @examples
 ebestimate <- function(logodds.subtype,
                        sigma.subtype,
                        logodds.standard,
