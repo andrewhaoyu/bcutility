@@ -1,3 +1,4 @@
+
 #' Title
 #'
 #' @param logodds.subtype
