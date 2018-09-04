@@ -11,7 +11,7 @@
 #' @examples
 GenerateIntrinsicmis <- function(ER,PR,HER2,Grade){
   n <- length(ER)
-  idx.LA <- which(HER2==0&(ER==1|PR==1)&Grade!=3)
+  idx.LA <- which(HER2==0&(ER==1|PR==1)&(Grade==1|Grade==2))
   idx.LB <- which(HER2==1&(ER==1|PR==1))
   idx.LUBHER2 <- which(HER2==0&(ER==1|PR==1)&Grade==3)
   idx.HER2 <- which(HER2==1&ER==0&PR==0)
