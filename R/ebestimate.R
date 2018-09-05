@@ -11,19 +11,20 @@
 #'
 #' @examples
 EbestimateNew <- function(logodds.subtype,
-                       sigma.subtype,
-                       logodds.standard,
-                       prior.sigma
+                          sigma.subtype,
+                          logodds.standard,
+                          prior.sigma
 ){
   M <- length(logodds.subtype)
+  if(det(prior.sigma)==0){
+    result <- as.vector(rep(logodds.standard,M))
+  }else{
+    result <- solve(solve(sigma.subtype)+solve(prior.sigma))%*%(solve(sigma.subtype)%*%logodds.subtype+ solve(prior.sigma)%*%as.vector(rep(logodds.standard,M)))
+  }
 
-    result <- solve(solve(sigma.subtype)+solve(prior.sigma))%*%(solve(sigma.subtype)%*%logodds.subtype+
-                                                                     solve(prior.sigma)*rep(logodds.standard,M))
-    return(result)
+  return(result)
 
 }
-
-
 
 
 
