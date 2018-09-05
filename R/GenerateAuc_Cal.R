@@ -60,7 +60,7 @@ GenerateAuc_Cal <- function(
   specificities[,2] <- roc.intrinsic$specificities
 
 
-  prs.intrinsic.dic <- x.test%*%log.odds.intrinsic.dic
+  prs.intrinsic.dic <- x.test%*%log.odds.dic
 
   cal.intrinsic.dic <- calibration(y.test,prs.intrinsic.dic)
   roc.intrinsic.dic <- roc(y.test,as.vector(prs.intrinsic.dic),ci=T,plot=F)
