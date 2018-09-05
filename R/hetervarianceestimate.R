@@ -34,5 +34,9 @@ HeterVarianceEstimateNew <- function(log.odds,sigma,R){
   #if(result <= 0){
   #  result <- 0
   # }
+  if(result <= 0){
+  result <- 0
+}
+return(result)
   return(result)
 }

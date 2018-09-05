@@ -43,6 +43,7 @@ EbestimateNew <- function(logodds.subtype,
 
 
 
+
 #' Title
 #'
 #' @param logodds.subtype
