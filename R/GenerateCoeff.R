@@ -41,7 +41,7 @@ GenerateCoeff <- function(
   temp <- exp(coef(model)[2]+summary(model)$coefficient[2,2]*qnorm(c(0.025,0.5,0.975)))
   coeff[2] <- temp[2]
   coeff_95[2] <- paste0(round(temp[2],pla)," (",round(temp[1],pla)," - ",round(temp[3],pla),")")
-  prs.intrinsic.dic <- x.test%*%log.odds.intrinsic.dic
+  prs.intrinsic.dic <- x.test%*%log.odds.dic
   sd.prs.control <- sd(prs.intrinsic.dic[idx.control])
   prs.intrinsic.dic.scale <- prs.intrinsic.dic/sd.prs.control
   model <- glm(y.test~  prs.intrinsic.dic.scale,family = binomial(link='logit'))
